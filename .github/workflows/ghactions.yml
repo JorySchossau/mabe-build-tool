@@ -30,7 +30,7 @@ jobs:
           nim -v
           ld -v
       - name: build
-        run: nim c -o:mbuild -d:danger --panics:on --passL:--static --passC:--static build
+        run: nim c -o:mbuild -d:danger --panics:on --passL:--static --passC:-std=gnu99 build
       - name: Run UPX
         uses: crazy-max/ghaction-upx@v1
         with:
