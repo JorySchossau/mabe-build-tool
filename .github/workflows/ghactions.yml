@@ -1,4 +1,4 @@
-name: Artifact CI
+name: Release Builds
 
 on:
   push:
@@ -15,5 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: stable
       - name: get-ld-ver-info
         run: ld -v
