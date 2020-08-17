@@ -20,7 +20,17 @@ jobs:
         run: sh init.sh -y
       - name: init-nim
         run: echo "::add-path::/github/home/.nimble/bin"
-      - name: test-nim2
-        run: nim -v
-      #- name: get-ld-ver-info
-      #  run: ld -v
+      - name: check-versions
+        run: |
+          nim -v
+          ld -v
+      - name: build
+        run: nim c -o:mbuild -d:danger --panics:on --passL:--static --passC:--static build
+      - name: Run UPX
+        uses: crazy-max/ghaction-upx@v1
+        with:
+          version: latest
+          file: ./mbuild
+          args: --best -q
+      - name: See Size
+        run: ls -lh mbuild
