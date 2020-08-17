@@ -11,10 +11,12 @@ jobs:
 
     runs-on: ubuntu-latest
     container:
-      image: centos/devtoolset-7-toolchain-centos7
+      image: centos:7 #centos/devtoolset-7-toolchain-centos7
     steps:
       - name: Install DevTools
-        run: sudo yum install glibc-static libstdc++-static -y
+        run: |
+          yum group install "Development Tools" -y
+          yum install glibc-static libstdc++-static -y
       - uses: actions/checkout@v2
       - name: dl-choosenim
         run: curl --output init.sh https://nim-lang.org/choosenim/init.sh
