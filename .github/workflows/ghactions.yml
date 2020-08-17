@@ -11,7 +11,7 @@ jobs:
 
     runs-on: ubuntu-latest
     container:
-      image: centos:rhscl/devtoolset-7-toolchain-rhel7
+      image: centos/devtoolset-7-toolchain-centos7
     steps:
       - uses: actions/checkout@v2
       - name: dl-choosenim
