@@ -15,8 +15,9 @@ jobs:
     steps:
       - name: Install DevTools
         run: |
-          yum group install "Development Tools" -y
-          yum install glibc-static libstdc++-static -y
+          yum install gcc autoconf automake make binutils glibc glibc-devel glibc-static -y
+          #yum group install "Development Tools" -y
+          #yum install glibc-static libstdc++-static -y
       - uses: actions/checkout@v2
       - name: dl-choosenim
         run: curl --output init.sh https://nim-lang.org/choosenim/init.sh
