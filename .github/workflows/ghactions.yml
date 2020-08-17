@@ -7,11 +7,34 @@ on:
     branches: [ master ]
 
 jobs:
+  build-mac:
+    runs-on: macos-latest
+    steps:
+      - name: Download MacOS SDK
+        run: curl --output sdk.tar.xz -L "https://github.com/phracker/MacOSX-SDKs/releases/download/10.15/MacOSX10.13.sdk.tar.xz"
+      - name: Exctract SDK
+        run: |
+          tar xf sdk.tar.xz
+          ls .
+      - name: Add Nim Path
+        run: echo "::add-path::/github/home/.nimble/bin"
+      - name: Download Nim and Compile
+        env:
+          MACOSX_DEPLOYMENT_TARGET: "10.13"
+          SDKROOT: "/github/home/MacOSX10.13.sdk"
+        run: |
+          curl --output init.sh https://nim-lang.org/choosenim/init.sh
+          sh init.sh -y
+          nim -v
+          nim c -o:osx_build -d:danger --panics:on build
+          ls -lh osx_build
   build-linux:
     runs-on: ubuntu-latest
     container:
       image: centos:7 #centos/devtoolset-7-toolchain-centos7
     steps:
+      - name: DoCrash
+        run: which yum
       - name: Install DevTools
         run: |
           yum install gcc autoconf automake make binutils glibc glibc-devel glibc-static -y
