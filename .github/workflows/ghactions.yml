@@ -14,8 +14,9 @@ jobs:
       image: centos:7
     steps:
       - uses: actions/checkout@v2
-      - uses: jiro4989/setup-nim-action@v1
-        with:
-          nim-version: stable
+      - name: dl-nim
+        run: curl --output init.sh https://nim-lang.org/choosenim/init.sh
+      #- name: init-nim
+      #  run: sh init.sh -y
       - name: get-ld-ver-info
         run: ld -v
