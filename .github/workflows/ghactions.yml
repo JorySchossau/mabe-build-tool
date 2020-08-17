@@ -19,8 +19,10 @@ jobs:
       - name: install-nim
         run: sh init.sh -y
       - name: init-nim
-        run: echo "::add-path::${HOME}/.nimble/bin"
+        run: echo "::add-path::export PATH=/github/home/.nimble/bin"
       - name: test-nim
-        run: which nim
+        run: where nim
+      - name: test-nim2
+        run: nim -v
       #- name: get-ld-ver-info
       #  run: ld -v
