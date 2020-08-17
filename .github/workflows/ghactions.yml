@@ -1,0 +1,20 @@
+name: Artifact CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build-linux:
+
+    runs-on: ubuntu-latest
+    container:
+      image: centos:7
+    steps:
+      - name: build-linux 
+      - uses: actions/checkout@v2
+      - uses: jiro4989/setup-nim-action@v1
+      - name: get-ld-ver-info
+        run: ld -v
