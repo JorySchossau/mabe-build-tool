@@ -14,8 +14,10 @@ jobs:
       - name: Get Real Path
         run: |
           echo "will compute the path"
-          echo ::set-env name=REALPATH::"$(cd "$(dirname /github/home)" && pwd -P)"
+          echo ::set-env name=REALPATH::"$(cd "$(dirname $PWD)" && pwd -P)"
           echo "Path is: $REALPATH"
+          echo "pwd is: $PWD"
+          echo "home is: $(~)"
       - name: Download MacOS SDK
         run: curl --output sdk.tar.xz -L "https://github.com/phracker/MacOSX-SDKs/releases/download/10.15/MacOSX10.13.sdk.tar.xz"
       - name: Exctract SDK
