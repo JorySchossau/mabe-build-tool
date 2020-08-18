@@ -81,7 +81,11 @@ jobs:
         run: |
           yum install gcc autoconf automake make binutils glibc glibc-devel glibc-static -y
       - uses: actions/checkout@v2
+
       - name: Get and Build Musl
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
         run: |
           git clone --depth=1 git://git.musl-libc.org/musl musl
           cd musl
