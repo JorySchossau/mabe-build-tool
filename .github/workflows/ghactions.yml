@@ -28,8 +28,6 @@ jobs:
           version: latest
           file: ./win_build.exe
           args: --best -q
-      - name: See Size
-        run: ls -lh win_build.exe
       - name: Upload Windows Binary
         uses: svenstaro/upload-release-action@v2
         with:
