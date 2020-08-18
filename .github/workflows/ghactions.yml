@@ -37,7 +37,8 @@ jobs:
           #nim c -o:osx_build -d:danger --panics:on build
           #ls -lh osx_build
           git clone --branch=support_files "https://github.com/joryschossau/mabe-build-tool" supporting_files
-          unzip supporting_files/bin/osx_upx.zip -d $PWD
+          unzip supporting_files/bin/osx_upx.zip
+          ls .
           supporting_files/bin/osx_upx -h
           supporting_files/bin/osx_upx --best -q osx_build
   build-linux:
