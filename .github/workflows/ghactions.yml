@@ -10,6 +10,12 @@ jobs:
   build-mac:
     runs-on: macos-latest
     steps:
+      - name: Get Real Path
+        env:
+          script_abspath: $(perl -e 'use Cwd "abs_path"; print abs_path(@ARGV[0])' -- "$0")
+        run: echo "Path is $script_abspath"
+      - name: DoCrash
+        run: which clang
       - name: Download MacOS SDK
         run: curl --output sdk.tar.xz -L "https://github.com/phracker/MacOSX-SDKs/releases/download/10.15/MacOSX10.13.sdk.tar.xz"
       - name: Exctract SDK
