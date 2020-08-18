@@ -29,8 +29,8 @@ jobs:
       - name: Download Nim and Compile
         env:
           MACOSX_DEPLOYMENT_TARGET: 10.13
-          SDKROOT: $PWD/MacOSX10.13.sdk
         run: |
+          echo ::set-env name=SDKROOT::$PWD/MacOSX10.13.sdk
           curl --output init.sh https://nim-lang.org/choosenim/init.sh
           sh init.sh -y
           nim -v
