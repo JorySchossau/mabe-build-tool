@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: Get Real Path
         run: |
+          echo "will compute the path"
           echo ::set-env name=REALPATH::$(perl -e 'use Cwd "abs_path"; print abs_path(@ARGV[0])' -- "$0")
           echo "Path is: $REALPATH"
       - name: Download MacOS SDK
@@ -26,6 +27,7 @@ jobs:
       - name: set environment variables
         uses: allenevans/set-env@v1.0.0
         with:
+          overwrite: true
           MACOSX_DEPLOYMENT_TARGET: '10.13'
           SDKROOT: '/github/home/MacOSX10.13.sdk'
       - name: Download Nim and Compile
