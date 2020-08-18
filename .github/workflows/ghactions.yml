@@ -19,10 +19,15 @@ jobs:
           ls .
       - name: Add Nim Path
         run: echo "::add-path::/github/home/.nimble/bin"
+      - name: set environment variables
+        uses: allenevans/set-env@v1.0.0
+        with:
+          MACOSX_DEPLOYMENT_TARGET: '10.13'
+          SDKROOT: '/github/home/MacOSX10.13.sdk'
       - name: Download Nim and Compile
-        env:
-          MACOSX_DEPLOYMENT_TARGET: 10.13
-          SDKROOT: /github/home/MacOSX10.13.sdk
+      #  env:
+      #    MACOSX_DEPLOYMENT_TARGET: 10.13
+      #    SDKROOT: /github/home/MacOSX10.13.sdk
         run: |
           curl --output init.sh https://nim-lang.org/choosenim/init.sh
           sh init.sh -y
