@@ -10,6 +10,7 @@ jobs:
   build-mac:
     runs-on: macos-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Get Real Path
         run: |
           echo "will compute the path"
