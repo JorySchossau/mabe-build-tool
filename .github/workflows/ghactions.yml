@@ -15,7 +15,7 @@ jobs:
      - name: Get Nim
        run: |
          curl --output choosenim.exe -L "https://github.com/dom96/choosenim/releases/download/v0.6.0/choosenim-0.6.0_windows_amd64.exe"
-         choosenim.exe -y stable
+         .\choosenim.exe -y stable
      - name: Add Nim Path
        run: echo "::add-path::$HOME\.nimble\bin"
      - name: Test Nim
