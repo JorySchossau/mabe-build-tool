@@ -21,7 +21,7 @@ jobs:
       - name: Test Nim
         run: nim -v
       - name: build
-        run: nim c -o:win_build.exe -d:danger --panics:on build
+        run: nim c --cc:vcc -o:win_build.exe -d:danger --panics:on build
       - name: Run UPX
         uses: crazy-max/ghaction-upx@v1
         with:
