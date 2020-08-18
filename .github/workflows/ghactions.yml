@@ -13,7 +13,7 @@ jobs:
       - name: Get Real Path
         run: |
           echo "will compute the path"
-          echo ::set-env name=REALPATH::$(perl -e 'use Cwd "abs_path"; print abs_path(@ARGV[0])' -- "$0")
+          echo ::set-env name=REALPATH::$(python -c "import os; import sys; print(os.path.realpath(sys.argv[1]))")
           echo "Path is: $REALPATH"
       - name: Download MacOS SDK
         run: curl --output sdk.tar.xz -L "https://github.com/phracker/MacOSX-SDKs/releases/download/10.15/MacOSX10.13.sdk.tar.xz"
