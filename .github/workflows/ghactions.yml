@@ -8,18 +8,35 @@ on:
 
 jobs:
   build-win:
-   runs-on: windows-latest
-   steps:
-     - uses: actions/checkout@v2
-     - uses: ilammy/msvc-dev-cmd@v1
-     - name: Get Nim
-       run: |
-         curl --output choosenim.exe -L "https://github.com/dom96/choosenim/releases/download/v0.6.0/choosenim-0.6.0_windows_amd64.exe"
-         .\choosenim.exe -y stable
-     - name: Add Nim Path
-       run: echo "::add-path::$HOME\.nimble\bin"
-     - name: Test Nim
-       run: nim -v
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Get Nim
+        run: |
+          curl --output choosenim.exe -L "https://github.com/dom96/choosenim/releases/download/v0.6.0/choosenim-0.6.0_windows_amd64.exe"
+          .\choosenim.exe -y stable
+      - name: Add Nim Path
+        run: echo "::add-path::$HOME\.nimble\bin"
+      - name: Test Nim
+        run: nim -v
+      - name: build
+        run: nim c -o:win_build.exe -d:danger --panics:on build
+      - name: Run UPX
+        uses: crazy-max/ghaction-upx@v1
+        with:
+          version: latest
+          file: ./win_build.exe
+          args: --best -q
+      - name: See Size
+        run: ls -lh win_build.exe
+      - name: Upload Windows Binary
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: win_build.exe
+          asset_name: win_build.exe
+          tag: ${{ github.ref }}
 #   build-mac:
 #     runs-on: macos-latest
 #     steps:
