@@ -87,7 +87,7 @@ jobs:
           git clone --depth=1 git://git.musl-libc.org/musl musl
           cd musl
           ./configure --prefix="$PWD/../muslbin"
-          make --with-arch=x86_64 -j2
+          make -j2 #--with-arch=x86_64 -j2
           make install
           cd ..
       - name: dl-choosenim
