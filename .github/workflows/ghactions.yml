@@ -14,14 +14,15 @@ jobs:
         run: curl --output sdk.tar.xz -L "https://github.com/phracker/MacOSX-SDKs/releases/download/10.15/MacOSX10.13.sdk.tar.xz"
       - name: Exctract SDK
         run: |
+          ls -lh sdk.tar.xz
           tar xf sdk.tar.xz
           ls .
       - name: Add Nim Path
         run: echo "::add-path::/github/home/.nimble/bin"
       - name: Download Nim and Compile
         env:
-          MACOSX_DEPLOYMENT_TARGET: "10.13"
-          SDKROOT: "/github/home/MacOSX10.13.sdk"
+          MACOSX_DEPLOYMENT_TARGET: 10.13
+          SDKROOT: /github/home/MacOSX10.13.sdk
         run: |
           curl --output init.sh https://nim-lang.org/choosenim/init.sh
           sh init.sh -y
